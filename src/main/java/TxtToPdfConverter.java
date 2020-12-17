@@ -37,7 +37,7 @@ public class TxtToPdfConverter implements Converter{
         document.close();
         br.close();
 
-        System.out.println(filePath + TO_FORMAT + " was converted to a PDF file in : "
+        System.out.println(filePath + FROM_FORMAT + " was converted to a " + TO_FORMAT.toUpperCase() + " file in : "
                 + (System.currentTimeMillis() - start) + " milli seconds");
     }
 }

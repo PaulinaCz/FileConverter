@@ -37,7 +37,7 @@ public class PdfToDocxConverter implements Converter{
         reader.close();
         outStream.close();
 
-        System.out.println(filePath + TO_FORMAT + " was converted to a DOCX file in : "
+        System.out.println(filePath + FROM_FORMAT + " was converted to a " + TO_FORMAT.toUpperCase() + " file in : "
                 + (System.currentTimeMillis() - start) + " milli seconds");
     }
 }
