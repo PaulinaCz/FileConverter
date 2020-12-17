@@ -10,14 +10,14 @@ import java.io.IOException;
 
 public class PdfToDocxConverter implements Converter{
 
-    public final String TO_FORMAT = "docx";
-    public final String FROM_FORMAT = "pdf";
+    public final String TO_FORMAT = ".docx";
+    public final String FROM_FORMAT = ".pdf";
 
     @Override
     public void convert(String filePath) throws IOException {
 
         long start = System.currentTimeMillis();
-        PdfReader reader = new PdfReader(filePath + "." + FROM_FORMAT);
+        PdfReader reader = new PdfReader(filePath + FROM_FORMAT);
         PdfReaderContentParser parser = new PdfReaderContentParser(reader);
         XWPFDocument document = new XWPFDocument();
 
@@ -30,14 +30,14 @@ public class PdfToDocxConverter implements Converter{
             run.addBreak(BreakType.PAGE);
         }
 
-        FileOutputStream outStream = new FileOutputStream(new File(filePath + "." + TO_FORMAT));
+        FileOutputStream outStream = new FileOutputStream(new File(filePath + TO_FORMAT));
         document.write(outStream);
 
 
         reader.close();
         outStream.close();
 
-        System.out.println(filePath + "." + TO_FORMAT + " was converted to a DOCX file in : "
+        System.out.println(filePath + TO_FORMAT + " was converted to a DOCX file in : "
                 + (System.currentTimeMillis() - start) + " milli seconds");
     }
 }

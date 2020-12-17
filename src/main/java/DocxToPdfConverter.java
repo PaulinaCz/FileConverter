@@ -8,17 +8,17 @@ import java.io.*;
 
 public class DocxToPdfConverter implements Converter {
 
-    public final String TO_FORMAT = "pdf";
-    public final String FROM_FORMAT = "docx";
+    public final String TO_FORMAT = ".pdf";
+    public final String FROM_FORMAT = ".docx";
 
     public void convert(String  filePath) throws IOException {
 
 
         long start = System.currentTimeMillis();
-        InputStream inStream = new FileInputStream(new File(filePath + "." + FROM_FORMAT));
+        InputStream inStream = new FileInputStream(new File(filePath + FROM_FORMAT));
         XWPFDocument document = new XWPFDocument(inStream);
 
-        OutputStream outStream = new FileOutputStream(new File(filePath + "." + TO_FORMAT));
+        OutputStream outStream = new FileOutputStream(new File(filePath + TO_FORMAT));
         PdfOptions options = PdfOptions.create();
 
         PdfConverter.getInstance().convert(document, outStream, options);
