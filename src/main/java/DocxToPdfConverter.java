@@ -25,7 +25,7 @@ public class DocxToPdfConverter implements Converter {
 
         inStream.close();
         outStream.close();
-        System.out.println(filePath + "." + TO_FORMAT + " was converted to a PDF file in : "
+        System.out.println(filePath + TO_FORMAT + " was converted to a PDF file in : "
                 + (System.currentTimeMillis() - start) + " milli seconds");
     }
 }
