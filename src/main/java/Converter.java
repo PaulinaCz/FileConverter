@@ -1,13 +1,9 @@
-import com.itextpdf.text.DocumentException;
-
-
 import java.io.IOException;
 
 public interface Converter {
 
 
-
     /*Convert File fileName
      */
-    void convert(String fileName) throws IOException;
+    void convert(String filePath) throws IOException;
 }

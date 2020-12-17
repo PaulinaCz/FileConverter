@@ -11,22 +11,21 @@ public class DocxToPdfConverter implements Converter {
     public final String TO_FORMAT = "pdf";
     public final String FROM_FORMAT = "docx";
 
-    public void convert(String  fileName) throws IOException {
+    public void convert(String  filePath) throws IOException {
 
 
         long start = System.currentTimeMillis();
-        InputStream inStream = new FileInputStream(new File(fileName + "." + FROM_FORMAT));
-        OutputStream outStream = new FileOutputStream(new File(fileName + "." + TO_FORMAT));
-
+        InputStream inStream = new FileInputStream(new File(filePath + "." + FROM_FORMAT));
         XWPFDocument document = new XWPFDocument(inStream);
 
+        OutputStream outStream = new FileOutputStream(new File(filePath + "." + TO_FORMAT));
         PdfOptions options = PdfOptions.create();
 
         PdfConverter.getInstance().convert(document, outStream, options);
 
         inStream.close();
         outStream.close();
-        System.out.println(fileName + "." + TO_FORMAT + " was converted to a PDF file in : "
+        System.out.println(filePath + "." + TO_FORMAT + " was converted to a PDF file in : "
                 + (System.currentTimeMillis() - start) + " milli seconds");
     }
 }

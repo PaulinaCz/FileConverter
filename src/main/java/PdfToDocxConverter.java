@@ -14,13 +14,12 @@ public class PdfToDocxConverter implements Converter{
     public final String FROM_FORMAT = "pdf";
 
     @Override
-    public void convert(String fileName) throws IOException {
+    public void convert(String filePath) throws IOException {
 
         long start = System.currentTimeMillis();
-
-        XWPFDocument document = new XWPFDocument();
-        PdfReader reader = new PdfReader(fileName + "." + FROM_FORMAT);
+        PdfReader reader = new PdfReader(filePath + "." + FROM_FORMAT);
         PdfReaderContentParser parser = new PdfReaderContentParser(reader);
+        XWPFDocument document = new XWPFDocument();
 
         for(int i =1; i <= reader.getNumberOfPages(); i++){
             TextExtractionStrategy strategy = parser.processContent(i, new SimpleTextExtractionStrategy());
@@ -31,14 +30,14 @@ public class PdfToDocxConverter implements Converter{
             run.addBreak(BreakType.PAGE);
         }
 
-        FileOutputStream outStream = new FileOutputStream(new File(fileName + "." + TO_FORMAT));
+        FileOutputStream outStream = new FileOutputStream(new File(filePath + "." + TO_FORMAT));
         document.write(outStream);
 
 
         reader.close();
         outStream.close();
 
-        System.out.println(fileName + "." + TO_FORMAT + " was converted to a DOCX file in : "
+        System.out.println(filePath + "." + TO_FORMAT + " was converted to a DOCX file in : "
                 + (System.currentTimeMillis() - start) + " milli seconds");
     }
 }
