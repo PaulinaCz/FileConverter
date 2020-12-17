@@ -13,6 +13,7 @@ public class CsvToXlsxConverter implements Converter{
     @Override
     public void convert(String filePath) throws IOException {
 
+        long start = System.currentTimeMillis();
         SXSSFWorkbook workbook = new SXSSFWorkbook();
         SXSSFSheet sheet = workbook.createSheet();
 
@@ -33,5 +34,7 @@ public class CsvToXlsxConverter implements Converter{
         workbook.write(outputStream);
         outputStream.close();
 
+        System.out.println(filePath + FROM_FORMAT + " was converted to a" + TO_FORMAT.toUpperCase() + "file in : "
+                + (System.currentTimeMillis() - start) + " milli seconds");
     }
 }
