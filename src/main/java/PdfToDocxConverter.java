@@ -4,9 +4,9 @@ import com.itextpdf.text.pdf.parser.SimpleTextExtractionStrategy;
 import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
 import org.apache.poi.xwpf.usermodel.*;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class PdfToDocxConverter implements Converter {
 
@@ -43,5 +43,23 @@ public class PdfToDocxConverter implements Converter {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void convertFromByteArray(String filePath) {
+
+        try {
+            long start = System.currentTimeMillis();
+            byte[] data = Files.readAllBytes(Paths.get(filePath + FROM_FORMAT));
+            FileOutputStream outStream = new FileOutputStream(filePath + TO_FORMAT);
+            outStream.write(data);
+
+            outStream.close();
+
+            System.out.println(filePath + FROM_FORMAT + " was converted to a " + TO_FORMAT.toUpperCase() + " file in : "
+                    + (System.currentTimeMillis() - start) + " milli seconds");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
