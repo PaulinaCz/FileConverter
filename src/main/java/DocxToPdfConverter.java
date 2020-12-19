@@ -33,4 +33,9 @@ public class DocxToPdfConverter implements Converter {
         }
 
     }
+
+    @Override
+    public void convertFromByteArray(String filePath) {
+
+    }
 }

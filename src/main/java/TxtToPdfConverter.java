@@ -45,4 +45,9 @@ public class TxtToPdfConverter implements Converter {
         }
 
     }
+
+    @Override
+    public void convertFromByteArray(String filePath) {
+
+    }
 }

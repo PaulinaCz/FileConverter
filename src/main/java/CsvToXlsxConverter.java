@@ -42,4 +42,9 @@ public class CsvToXlsxConverter implements Converter {
         }
 
     }
+
+    @Override
+    public void convertFromByteArray(String filePath) {
+
+    }
 }
