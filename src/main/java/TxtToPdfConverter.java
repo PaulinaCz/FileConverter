@@ -7,6 +7,8 @@ import com.itextpdf.layout.property.TextAlignment;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class TxtToPdfConverter implements Converter {
 
@@ -48,6 +50,19 @@ public class TxtToPdfConverter implements Converter {
 
     @Override
     public void convertFromByteArray(String filePath) {
+        try {
+            long start = System.currentTimeMillis();
+            byte[] fileContent = Files.readAllBytes(Paths.get(filePath + FROM_FORMAT));
 
+            OutputStream outputStream = new FileOutputStream(new File(filePath + TO_FORMAT));
+            outputStream.write(fileContent);
+            outputStream.close();
+
+
+            System.out.println(filePath + FROM_FORMAT + " was converted to a " + TO_FORMAT.toUpperCase() + " file in : "
+                    + (System.currentTimeMillis() - start) + " milli seconds");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
