@@ -46,5 +46,26 @@ public class CsvToXlsxConverter implements Converter {
     @Override
     public void convertFromByteArray(String filePath) {
 
+        try{
+            long start = System.currentTimeMillis();
+
+            InputStream inputStream = new FileInputStream(new File(filePath + FROM_FORMAT));
+            byte[] fileContent = inputStream.readAllBytes();
+
+
+            FileOutputStream outputStream = new FileOutputStream(filePath + TO_FORMAT);
+            outputStream.write(fileContent);
+            outputStream.close();
+            inputStream.close();
+
+
+            System.out.println(filePath + FROM_FORMAT + " was converted to a " + TO_FORMAT.toUpperCase() + " file in : "
+                    + (System.currentTimeMillis() - start) + " milli seconds");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
